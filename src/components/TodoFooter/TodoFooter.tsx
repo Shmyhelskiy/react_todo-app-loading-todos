@@ -17,7 +17,7 @@ export const TodoFooter: React.FC<Props> = ({
   return (
     <footer className="todoapp__footer" data-cy="Footer">
       <span className="todo-count" data-cy="TodosCounter">
-        {totalItems} items left
+        {totalItems - completedTodos} items left
       </span>
 
       <TodoNav handleFilter={handleFilter} selectFilter={selectFilter} />

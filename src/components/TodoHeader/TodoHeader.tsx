@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Todo } from '../../types/Todo';
 import { TodoList } from '../TodoList/TodoList';
 import { FilterNav } from '../../types/Filter';
@@ -24,6 +24,14 @@ export const TodoHeader: React.FC<Props> = ({
   completedTodos,
 }) => {
   const [newTodoTitle, setNewTodoTitle] = useState('');
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const handleInputSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewTodoTitle(event.target.value);
@@ -54,6 +62,7 @@ export const TodoHeader: React.FC<Props> = ({
             placeholder="What needs to be done?"
             value={newTodoTitle}
             onChange={handleInputSubmit}
+            ref={inputRef}
           />
         </form>
       </header>

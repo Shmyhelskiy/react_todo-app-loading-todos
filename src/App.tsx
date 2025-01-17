@@ -38,9 +38,9 @@ export const App: React.FC = () => {
   useEffect(() => {
     setFilterTodos(filteredTodos(todos, filter));
 
-    const incompleteCount = todos.filter(todo => !todo.completed).length;
+    const completeCount = todos.filter(todo => todo.completed).length;
 
-    setCompletedTodos(incompleteCount);
+    setCompletedTodos(completeCount);
   }, [todos, filter]);
 
   const handleFormSubmit = (newTodoTitle: string) => {
@@ -56,7 +56,7 @@ export const App: React.FC = () => {
       userId: TodoService.USER_ID,
     };
 
-    TodoService.createPost(createdTodo)
+    TodoService.createTodo(createdTodo)
       .then(newTodo => {
         setTodos(currentTodos => [...currentTodos, newTodo]);
       })
@@ -66,7 +66,7 @@ export const App: React.FC = () => {
   };
 
   const deleteTodo = (todoId: number) => {
-    TodoService.deletePost(todoId)
+    TodoService.deleteTodo(todoId)
       .then(() => {
         setTodos(currentTodos => {
           return currentTodos.filter(todo => todo.id !== todoId);
